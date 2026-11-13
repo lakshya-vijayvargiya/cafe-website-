@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | The Bidholi Corner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { espresso: '#2A1A10', roast: '#4E3220', rust: '#B4602A', beige: '#D7CCC8', cream: '#FBF6EC', softCream: '#F1E4CC', gold: '#CE9E5E' }, fontFamily: { serif: ['Fraunces', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }
+    </script>
+</head>
+<body class="bg-[#FBF6EC] text-[#2A1A10] font-sans antialiased pt-20">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#2A1A10]/95 backdrop-blur-md border-b border-[#CE9E5E]/20">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-20">
+            <a href="index.html" class="flex items-center gap-3">
+                <i class="fa-solid fa-mug-hot text-[#B4602A] text-xl"></i>
+                <span class="font-serif text-2xl font-bold text-white">The Bidholi Corner</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-white hover:text-[#CE9E5E] text-sm font-medium transition-colors">Home</a>
+                <a href="about.html" class="text-white hover:text-[#CE9E5E] text-sm font-medium transition-colors">About Us</a>
+                <a href="menu.html" class="text-white hover:text-[#CE9E5E] text-sm font-medium transition-colors">Menu</a>
+                <a href="contact.html" class="text-[#CE9E5E] text-sm font-medium">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-20 max-w-3xl mx-auto px-4 text-center min-h-[70vh]">
+        <h1 class="font-serif text-4xl font-bold text-[#2A1A10] mb-4">Visit The Bidholi Corner</h1>
+        <p class="text-[#4E3220] mb-8">Drop by, call ahead, or send us a message — we'd love to have you.</p>
+        <div class="bg-white p-8 rounded-3xl shadow-md border border-[#4E3220]/10 text-left space-y-4">
+            <p><strong>Location:</strong> Near UPES, Bidholi, Dehradun</p>
+            <p><strong>Email:</strong> hello@thebidholicorner.com</p>
+            <p><strong>Phone:</strong> +91 98765 43210</p>
+        </div>
+    </main>
+
+    <footer class="bg-[#2A1A10] text-white pt-12 pb-8 border-t border-[#CE9E5E]/20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>© 2026 The Bidholi Corner. A Code Minds Project.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

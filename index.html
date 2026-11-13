@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bidholi Corner | Cozy Café Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#2C1A14',
+                        roast: '#3E2723',
+                        warmBrown: '#4E342E',
+                        beige: '#D7CCC8',
+                        cream: '#FFF8E7',
+                        softCream: '#FAF0E6',
+                        gold: '#D4AF37',
+                        goldHover: '#B89428',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2C1A14;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -24px;
+            left: 0;
+            background-color: #D4AF37;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link.active::after,
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .glass-nav {
+            background: rgba(44, 26, 20, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #gift-card-preview {
+            transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease, transform 0.4s ease;
+        }
+        #gift-card-preview:hover {
+            transform: translateY(-4px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes successPop {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-successPop {
+            animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 22s linear infinite;
+        }
+
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        #cart-drawer-panel {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .luxury-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+        }
+        .luxury-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(44, 26, 20, 0.12);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-cream text-espresso font-sans antialiased min-h-screen flex flex-col selection:bg-gold selection:text-espresso">
+
+    <header class="sticky top-0 z-50 glass-nav border-b border-gold/20 shadow-md transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <div class="flex items-center gap-6">
+                    <a href="#home" onclick="switchPage('home')" class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 rounded-full bg-gold/20 flex items-center justify-center text-gold border border-gold/40 group-hover:bg-gold group-hover:text-espresso transition-all duration-500 shadow-md transform group-hover:rotate-12">
+                            <i class="fa-solid fa-mug-hot text-lg"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span
+                                class="font-serif text-2xl font-bold text-cream tracking-wide group-hover:text-gold transition-colors">The
+                                Bidholi Corner</span>
+                            <span class="text-[9px] tracking-widest uppercase font-bold text-gold/80">Cafe &
+                                Rewards</span>
+                        </div>
+                    </a>
+
+                    <nav
+                        class="hidden lg:flex items-center space-x-6 font-semibold text-xs tracking-wider uppercase text-cream/90">
+                        <button onclick="switchPage('menu')" id="link-menu"
+                            class="nav-link py-2 transition-colors hover:text-gold">Menu</button>
+
+                        <div class="relative group py-2">
+                            <button onclick="switchPage('shop')" id="link-shop"
+                                class="nav-link flex items-center gap-1.5 transition-colors hover:text-gold">
+                                Shop <i class="fa-solid fa-chevron-down text-[10px] text-gold transition-transform group-hover:rotate-180"></i>
+                            </button>
+                            <div
+                                class="dropdown-menu absolute top-full left-0 w-52 bg-espresso border border-gold/30 rounded-2xl shadow-xl py-3 z-50 flex flex-col space-y-1">
+                                <button onclick="switchPage('shop'); filterShopCategory('beans')"
+                                    class="text-left px-5 py-2 text-xs text-cream hover:bg-gold/20 hover:text-gold transition-all font-semibold">☕
+                                    Coffee Beans</button>
+                                <button onclick="switchPage('shop'); filterShopCategory('merch')"
+                                    class="text-left px-5 py-2 text-xs text-cream hover:bg-gold/20 hover:text-gold transition-all font-semibold">🛍️
+                                    Official Merchandise</button>
+                                <button onclick="switchPage('shop'); filterShopCategory('magnets')"
+                                    class="text-left px-5 py-2 text-xs text-cream hover:bg-gold/20 hover:text-gold transition-all font-semibold">🧲
+                                    Fridge Magnets</button>
+                            </div>
+                        </div>
+
+                        <button onclick="switchPage('rewards')" id="link-rewards"
+                            class="nav-link py-2 transition-colors hover:text-gold">Rewards</button>
+                        <button onclick="switchPage('giftcards')" id="link-giftcards"
+                            class="nav-link py-2 transition-colors hover:text-gold">Gift Cards</button>
+                        <button onclick="switchPage('reviews')" id="link-reviews"
+                            class="nav-link py-2 transition-colors hover:text-gold">Reviews</button>
+                    </nav>
+                </div>
+
+                <div class="flex items-center gap-3.5">
+                    <button onclick="openStoreLocator()"
+                        class="hidden sm:flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-cream/90 hover:text-gold transition-colors">
+                        <i class="fa-solid fa-location-dot text-gold text-sm animate-pulse"></i> Find a Cafe
+                    </button>
+
+                    <button onclick="toggleCartDrawer(true)"
+                        class="relative p-2.5 bg-roast text-gold border border-gold/40 rounded-full hover:bg-gold hover:text-espresso transition-all duration-300 shadow-sm transform hover:scale-105"
+                        aria-label="Shopping Cart">
+                        <i class="fa-solid fa-bag-shopping text-base"></i>
+                        <span id="cart-badge"
+                            class="absolute -top-1 -right-1 bg-gold text-espresso text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-espresso transition-transform duration-300 scale-0">0</span>
+                    </button>
+
+                    <div id="auth-actions-container" class="hidden md:flex items-center gap-2">
+                        <button onclick="openAuthModal('signin')"
+                            class="px-3.5 py-1.5 border border-gold/60 text-cream font-bold text-xs uppercase tracking-wider rounded-full hover:bg-gold hover:text-espresso transition-all duration-300">Sign
+                            In</button>
+                        <button onclick="openAuthModal('signup')"
+                            class="px-3.5 py-1.5 bg-gold text-espresso font-bold text-xs uppercase tracking-wider rounded-full hover:bg-goldHover hover:shadow-lg transition-all duration-300">Sign Up</button>
+                    </div>
+
+                    <div id="user-profile-badge" class="hidden items-center gap-2.5 bg-roast/80 px-3 py-1.5 rounded-full border border-gold/40">
+                        <div class="w-7 h-7 rounded-full bg-gold text-espresso flex items-center justify-center font-bold text-xs">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <span id="user-profile-name" class="text-xs font-bold text-cream">Member</span>
+                        <button onclick="handleSignOut()" class="text-beige hover:text-gold text-xs ml-1" title="Sign Out">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-cream hover:text-gold transition-transform">
+                        <i class="fa-solid fa-bars text-xl" id="mobile-menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-espresso border-t border-gold/20 px-6 py-6 space-y-4 animate-fadeInUp">
+            <button onclick="switchPage('menu'); toggleMobileMenu();"
+                class="block w-full text-left font-bold text-sm text-cream py-2 border-b border-white/5 transition-colors hover:text-gold">Menu</button>
+            <button onclick="switchPage('shop'); toggleMobileMenu();"
+                class="block w-full text-left font-bold text-sm text-cream py-2 border-b border-white/5 transition-colors hover:text-gold">Coffee &
+                Shop</button>
+            <button onclick="switchPage('rewards'); toggleMobileMenu();"
+                class="block w-full text-left font-bold text-sm text-cream py-2 border-b border-white/5 transition-colors hover:text-gold">Rewards</button>
+            <button onclick="switchPage('giftcards'); toggleMobileMenu();"
+                class="block w-full text-left font-bold text-sm text-cream py-2 border-b border-white/5 transition-colors hover:text-gold">Gift
+                Cards</button>
+            <button onclick="switchPage('reviews'); toggleMobileMenu();"
+                class="block w-full text-left font-bold text-sm text-cream py-2 border-b border-white/5 transition-colors hover:text-gold">Customer
+                Reviews</button>
+            <div id="mobile-auth-container" class="pt-4 flex gap-3">
+                <button onclick="openAuthModal('signin'); toggleMobileMenu();"
+                    class="flex-1 py-2 border border-gold text-cream font-bold text-xs uppercase tracking-wider rounded-full hover:bg-gold hover:text-espresso transition-all">Sign
+                    In</button>
+                <button onclick="openAuthModal('signup'); toggleMobileMenu();"
+                    class="flex-1 py-2 bg-gold text-espresso font-bold text-xs uppercase tracking-wider rounded-full hover:bg-goldHover transition-all">Sign Up</button>
+            </div>
+            <div id="mobile-user-badge" class="hidden pt-4 flex items-center justify-between text-cream">
+                <span class="text-xs font-bold text-gold" id="mobile-user-name">Welcome, Member</span>
+                <button onclick="handleSignOut(); toggleMobileMenu();" class="text-xs text-beige underline">Sign Out</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-gradient-to-r from-espresso via-roast to-espresso text-cream border-b border-gold/30 py-2.5 overflow-hidden shadow-inner relative z-40">
+        <div class="overflow-hidden whitespace-nowrap">
+            <div class="animate-marquee inline-flex items-center gap-12 text-xs font-bold tracking-wider uppercase">
+                <span class="flex items-center gap-2 text-gold"><i class="fa-solid fa-bolt text-gold animate-bounce"></i> Special Offer: Use Code <strong class="bg-gold/20 px-2 py-0.5 rounded text-cream border border-gold/40">BIDHOLI15</strong> for 15% off your first online order!</span>
+                <span class="flex items-center gap-2 text-beige"><i class="fa-solid fa-mug-hot text-gold"></i> Free Espresso Shot on orders above ₹499 near UPES campus!</span>
+                <span class="flex items-center gap-2 text-gold"><i class="fa-solid fa-gift text-gold"></i> Send TBC eGift cards instantly with customized themes!</span>
+                <span class="flex items-center gap-2 text-beige"><i class="fa-solid fa-star text-gold"></i> Join TBC Rewards today and earn double stars on cold brews!</span>
+                <span class="flex items-center gap-2 text-gold"><i class="fa-solid fa-bolt text-gold animate-bounce"></i> Special Offer: Use Code <strong class="bg-gold/20 px-2 py-0.5 rounded text-cream border border-gold/40">BIDHOLI15</strong> for 15% off your first online order!</span>
+                <span class="flex items-center gap-2 text-beige"><i class="fa-solid fa-mug-hot text-gold"></i> Free Espresso Shot on orders above ₹499 near UPES campus!</span>
+                <span class="flex items-center gap-2 text-gold"><i class="fa-solid fa-gift text-gold"></i> Send TBC eGift cards instantly with customized themes!</span>
+                <span class="flex items-center gap-2 text-beige"><i class="fa-solid fa-star text-gold"></i> Join TBC Rewards today and earn double stars on cold brews!</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow">
+
+        <div id="page-home" class="page-view animate-fadeInUp">
+            <section class="bg-softCream py-12 lg:py-20 border-b border-beige/40 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 text-center lg:text-left reveal-on-scroll">
+                        <span
+                            class="inline-block px-3 py-1 bg-gold/20 text-espresso text-xs font-bold uppercase tracking-widest rounded-full border border-gold/40 shadow-sm">Special
+                            Brew Collection</span>
+                        <h1 class="font-serif text-4xl sm:text-6xl font-bold text-espresso leading-tight">SUMMER-READY
+                            ROASTS & COLD BREWS</h1>
+                        <p class="text-lg text-warmBrown font-medium">Say hello to vibrant new tropical fruit blends,
+                            artisanal cold brews, and creamy iced lattes crafted to elevate your campus afternoon.</p>
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <button onclick="switchPage('menu')"
+                                class="px-8 py-3.5 bg-roast text-gold font-bold text-sm uppercase tracking-wider rounded-full hover:bg-espresso hover:shadow-xl transition-all duration-300 border border-gold/40 transform hover:-translate-y-0.5">Order
+                                Refreshers</button>
+                            <button onclick="switchPage('rewards')"
+                                class="px-8 py-3.5 border-2 border-roast text-espresso font-bold text-sm uppercase tracking-wider rounded-full hover:bg-roast hover:text-gold transition-all duration-300 transform hover:-translate-y-0.5">Join
+                                TBC Rewards</button>
+                        </div>
+                    </div>
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white reveal-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80"
+                            alt="Iced Coffee Refreshers"
+                            class="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16 lg:py-24 bg-cream overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div
+                        class="order-2 lg:order-1 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white reveal-on-scroll">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80"
+                            alt="Cozy Cafe Interior"
+                            class="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="order-1 lg:order-2 space-y-6 text-center lg:text-left reveal-on-scroll">
+                        <span
+                            class="inline-block px-3 py-1 bg-roast text-gold text-xs font-bold uppercase tracking-widest shadow-sm rounded-full">Campus
+                            Vibe</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso leading-tight">YOUR FAVORITE
+                            STUDY & CHILL SPOT</h2>
+                        <p class="text-lg text-warmBrown font-medium">Whether you're prepping for exams or catching up
+                            with friends near Bidholi and Kandoli, our ambient corners offer freshly baked pastries, wood-fired
+                            pizzas, and gourmet coffee.</p>
+                        <div>
+                            <button onclick="switchPage('about'); switchAboutTab('company')"
+                                class="px-8 py-3.5 bg-espresso text-gold font-bold text-sm uppercase tracking-wider rounded-full hover:bg-roast hover:shadow-xl transition-all duration-300 border border-gold/30 transform hover:-translate-y-0.5">Learn
+                                Our Story</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16 bg-softCream border-t border-beige/30">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-12 reveal-on-scroll">
+                        <h3 class="font-serif text-3xl font-bold text-espresso">Featured TBC Favorites</h3>
+                        <p class="text-warmBrown mt-2">Handpicked items loved by our daily regulars.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="home-featured-grid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-menu" class="page-view hidden animate-fadeInUp py-12 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    class="border-b border-beige/40 pb-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h1 class="font-serif text-4xl font-bold text-espresso">Menu</h1>
+                        <p class="text-sm text-warmBrown mt-1">Explore our full catalog of beverages, hot meals, pizza,
+                            and desserts. Click any item card to see ingredients.</p>
+                    </div>
+                    <div class="relative max-w-xs w-full">
+                        <i class="fa-solid fa-search absolute left-4 top-3.5 text-warmBrown/60"></i>
+                        <input type="text" id="menu-search" oninput="filterMenu()" placeholder="Search drinks, food..."
+                            class="w-full pl-11 pr-4 py-2.5 bg-white rounded-full text-sm border border-beige focus:outline-none focus:border-gold transition-all shadow-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <div class="space-y-2 lg:border-r lg:border-beige/40 lg:pr-6">
+                        <h3 class="font-bold text-xs uppercase tracking-wider text-warmBrown mb-4">Categories</h3>
+                        <div class="flex flex-row lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0"
+                            id="menu-categories-list">
+                            <button onclick="selectMenuCategory('all')"
+                                class="menu-cat-btn active px-4 py-2.5 rounded-xl text-left text-sm font-bold bg-roast text-gold transition-all whitespace-nowrap shadow-sm">All
+                                Items</button>
+                            <button onclick="selectMenuCategory('coffee')"
+                                class="menu-cat-btn px-4 py-2.5 rounded-xl text-left text-sm font-semibold text-warmBrown hover:bg-white transition-all whitespace-nowrap">Coffee
+                                & Brews</button>
+                            <button onclick="selectMenuCategory('chinese')"
+                                class="menu-cat-btn px-4 py-2.5 rounded-xl text-left text-sm font-semibold text-warmBrown hover:bg-white transition-all whitespace-nowrap">Chinese
+                                Wok</button>
+                            <button onclick="selectMenuCategory('south-indian')"
+                                class="menu-cat-btn px-4 py-2.5 rounded-xl text-left text-sm font-semibold text-warmBrown hover:bg-white transition-all whitespace-nowrap">South
+                                Indian</button>
+                            <button onclick="selectMenuCategory('north-indian')"
+                                class="menu-cat-btn px-4 py-2.5 rounded-xl text-left text-sm font-semibold text-warmBrown hover:bg-white transition-all whitespace-nowrap">North
+                                Indian</button>
+                            <button onclick="selectMenuCategory('pizza')"
+                                class="menu-cat-btn px-4 py-2.5 rounded-xl text-left text-sm font-semibold text-warmBrown hover:bg-white transition-all whitespace-nowrap">Pizza
+                                & Sourdough</button>
+                            <button onclick="selectMenuCategory('pastries')"
+                                class="menu-cat-btn px-4 py-2.5 rounded-xl text-left text-sm font-semibold text-warmBrown hover:bg-white transition-all whitespace-nowrap">Pastries
+                                & Desserts</button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="menu-items-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-shop" class="page-view hidden animate-fadeInUp py-12 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span
+                        class="px-3 py-1 bg-softCream text-espresso text-xs font-bold uppercase tracking-wider rounded-full border border-gold/30 shadow-sm">Artisan
+                        Roasted</span>
+                    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-espresso mt-2">TBC Coffee Beans &
+                        Merchandise</h1>
+                    <p class="text-warmBrown mt-2">Bring home our signature single-origin Arabica beans, flavored signature roasts, reusable
+                        ceramic mugs, french presses, and collectible fridge magnets.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="shop-items-grid"></div>
+            </div>
+        </div>
+
+        <div id="page-rewards" class="page-view hidden animate-fadeInUp">
+            <section class="bg-espresso text-cream py-16 lg:py-24 border-b border-gold/20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+                    <span class="text-gold font-bold text-xs uppercase tracking-widest">TBC Rewards Program</span>
+                    <h1 class="font-serif text-4xl sm:text-6xl font-bold mt-3 mb-6">FREE COFFEE IS JUST A CLICK AWAY
+                    </h1>
+                    <p class="text-lg text-beige mb-8">Join TBC Rewards to earn Stars on every order, unlock free
+                        drinks, birthday treats, and exclusive member perks.</p>
+                    <button onclick="openAuthModal('signup')"
+                        class="px-8 py-4 bg-gold text-espresso font-bold text-sm uppercase tracking-wider rounded-full hover:bg-goldHover hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">Join
+                        TBC Rewards Now</button>
+                </div>
+            </section>
+            <section class="py-16 bg-cream">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <h2 class="font-serif text-3xl font-bold text-espresso">Getting Started Is Easy</h2>
+                        <p class="text-warmBrown mt-2">Earn stars and get rewarded in just three simple steps.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                        <div class="p-6 bg-white rounded-3xl border border-beige/40 shadow-sm luxury-card">
+                            <div
+                                class="w-16 h-16 rounded-full bg-softCream text-roast font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-6 border border-gold/30">
+                                1</div>
+                            <h3 class="font-serif text-xl font-bold text-espresso mb-2">Create an Account</h3>
+                            <p class="text-sm text-warmBrown">Sign up with your mobile number or email to join TBC
+                                Rewards instantly.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-3xl border border-beige/40 shadow-sm luxury-card">
+                            <div
+                                class="w-16 h-16 rounded-full bg-softCream text-roast font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-6 border border-gold/30">
+                                2</div>
+                            <h3 class="font-serif text-xl font-bold text-espresso mb-2">Order & Earn Stars</h3>
+                            <p class="text-sm text-warmBrown">Earn 2 Stars for every ₹100 spent on coffee, food, and
+                                merch at the cafe.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-3xl border border-beige/40 shadow-sm luxury-card">
+                            <div
+                                class="w-16 h-16 rounded-full bg-softCream text-roast font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-6 border border-gold/30">
+                                3</div>
+                            <h3 class="font-serif text-xl font-bold text-espresso mb-2">Redeem for Freebies</h3>
+                            <p class="text-sm text-warmBrown">Redeem accumulated Stars for free extra shots, bakery
+                                items, or signature meals.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-giftcards" class="page-view hidden animate-fadeInUp py-12 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span
+                        class="px-3 py-1 bg-softCream text-espresso text-xs font-bold uppercase tracking-wider rounded-full border border-gold/30 shadow-sm">Share
+                        The Joy</span>
+                    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-espresso mt-2">Give the Gift of TBC</h1>
+                    <p class="text-warmBrown mt-2 max-w-xl mx-auto">The perfect gift for any coffee lover. Choose a
+                        design, pick an amount, and send it instantly.</p>
+                </div>
+
+                <div class="flex justify-center mb-10">
+                    <div class="inline-flex bg-white border border-beige/50 rounded-full p-1.5 shadow-sm">
+                        <button type="button" onclick="setGiftDeliveryMethod('egift')" id="gift-tab-egift"
+                            class="gift-delivery-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-roast text-gold transition-all shadow-sm">
+                            <i class="fa-solid fa-envelope-open-text mr-1.5"></i> eGift Card
+                        </button>
+                        <button type="button" onclick="setGiftDeliveryMethod('physical')" id="gift-tab-physical"
+                            class="gift-delivery-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-warmBrown hover:text-espresso transition-all">
+                            <i class="fa-solid fa-id-card mr-1.5"></i> Physical Card
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+                    <div class="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
+                        <div id="gift-card-preview"
+                            class="rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-espresso via-roast to-warmBrown p-8 text-cream flex flex-col justify-between h-64 border border-gold/40 relative">
+                            <i
+                                class="fa-solid fa-mug-hot text-[150px] absolute -right-8 -bottom-10 rotate-12 opacity-10 pointer-events-none"></i>
+                            <div class="flex justify-between items-center relative z-10">
+                                <span class="font-serif text-xl font-bold">The Bidholi Corner</span>
+                                <i class="fa-solid fa-mug-hot text-2xl text-gold"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <p class="text-xs uppercase tracking-widest text-gold">Digital Gift Card</p>
+                                <p class="font-serif text-4xl font-bold mt-1 text-gold" id="preview-card-amount">₹500
+                                </p>
+                            </div>
+                            <div class="flex justify-between items-end text-xs relative z-10 opacity-90">
+                                <span id="preview-card-recipient">To: Friend</span>
+                                <span>No Expiry</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-warmBrown mb-3">Choose a Design
+                            </h4>
+                            <div class="grid grid-cols-4 gap-3" id="gift-design-list">
+                                <button type="button" onclick="selectCardDesign('classic')" data-design="classic"
+                                    class="gift-design-btn ring-2 ring-gold rounded-xl overflow-hidden h-16 bg-gradient-to-br from-espresso via-roast to-warmBrown transition-all transform hover:scale-105"
+                                    aria-label="Classic Roast design"></button>
+                                <button type="button" onclick="selectCardDesign('gold')" data-design="gold"
+                                    class="gift-design-btn ring-2 ring-transparent hover:ring-gold/50 rounded-xl overflow-hidden h-16 bg-gradient-to-br from-gold via-goldHover to-warmBrown transition-all transform hover:scale-105"
+                                    aria-label="Golden Hour design"></button>
+                                <button type="button" onclick="selectCardDesign('midnight')" data-design="midnight"
+                                    class="gift-design-btn ring-2 ring-transparent hover:ring-gold/50 rounded-xl overflow-hidden h-16 bg-gradient-to-br from-black via-espresso to-roast transition-all transform hover:scale-105"
+                                    aria-label="Midnight Brew design"></button>
+                                <button type="button" onclick="selectCardDesign('birthday')" data-design="birthday"
+                                    class="gift-design-btn ring-2 ring-transparent hover:ring-gold/50 rounded-xl overflow-hidden h-16 bg-gradient-to-br from-gold via-cream to-beige transition-all transform hover:scale-105"
+                                    aria-label="Birthday Special design"></button>
+                            </div>
+                            <p class="text-[11px] text-warmBrown/70 mt-2">Classic Roast · Golden Hour · Midnight Brew ·
+                                Birthday Special</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl shadow-lg border border-beige/40">
+                        <form onsubmit="handleGiftCardSubmit(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-warmBrown mb-2">Select
+                                    Amount</label>
+                                <div class="grid grid-cols-4 gap-3">
+                                    <button type="button" onclick="setGiftAmount(250)"
+                                        class="gift-amt-btn py-2.5 rounded-xl border-2 border-gold bg-softCream font-bold text-espresso text-sm transition-all shadow-sm">₹250</button>
+                                    <button type="button" onclick="setGiftAmount(500)"
+                                        class="gift-amt-btn py-2.5 rounded-xl border-2 border-beige font-bold text-warmBrown text-sm hover:border-gold transition-all">₹500</button>
+                                    <button type="button" onclick="setGiftAmount(1000)"
+                                        class="gift-amt-btn py-2.5 rounded-xl border-2 border-beige font-bold text-warmBrown text-sm hover:border-gold transition-all">₹1000</button>
+                                    <button type="button" onclick="setGiftAmount(2000)"
+                                        class="gift-amt-btn py-2.5 rounded-xl border-2 border-beige font-bold text-warmBrown text-sm hover:border-gold transition-all">₹2000</button>
+                                </div>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <span class="text-xs text-warmBrown font-semibold whitespace-nowrap">Custom
+                                        Amount:</span>
+                                    <input type="number" min="100" step="50" id="gift-custom-amount"
+                                        oninput="setCustomGiftAmount(this.value)" placeholder="Enter amount ₹"
+                                        class="flex-1 px-3 py-2 rounded-lg border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Your
+                                        Name</label>
+                                    <input type="text" required placeholder="Your Name"
+                                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Recipient
+                                        Name</label>
+                                    <input type="text" id="gift-recipient" oninput="updateGiftPreview()" required
+                                        placeholder="Aarav Sharma"
+                                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-warmBrown mb-1"
+                                    id="gift-delivery-label">Recipient Email / WhatsApp</label>
+                                <input type="email" required placeholder="aarav@outlook.com or aarav@gmail.com"
+                                    pattern="[a-z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|live\.com|[a-z0-9.-]+\.[a-z]{2,})$"
+                                    class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Delivery
+                                    Date</label>
+                                <input type="date"
+                                    class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                                <p class="text-[11px] text-warmBrown/70 mt-1">Leave blank to send immediately.</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Personal
+                                    Message</label>
+                                <textarea rows="2" maxlength="150" placeholder="Enjoy your favorite coffee on me!"
+                                    class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full py-3.5 bg-roast text-gold font-bold text-xs uppercase tracking-wider rounded-full hover:bg-espresso hover:shadow-xl transition-all duration-300 border border-gold/30">
+                                <i class="fa-solid fa-gift mr-1.5"></i> Purchase Gift Card
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-16 max-w-3xl mx-auto bg-softCream border border-gold/30 rounded-3xl p-8 sm:p-10 text-center luxury-card shadow-sm">
+                    <div
+                        class="w-14 h-14 rounded-full bg-white text-gold flex items-center justify-center mx-auto mb-4 border border-gold/40 shadow-sm">
+                        <i class="fa-solid fa-wallet text-xl text-roast"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-espresso mb-2">Check Your Gift Card Balance</h3>
+                    <p class="text-sm text-warmBrown mb-6">Enter your TBC gift card number and PIN to view your
+                        remaining balance.</p>
+                    <form onsubmit="handleBalanceCheck(event)" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                        <input type="text" id="check-card-number" required placeholder="Card Number (e.g. TBC-7492...)"
+                            class="flex-1 px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm bg-white transition-all">
+                        <input type="text" id="check-card-pin" required placeholder="PIN"
+                            class="sm:w-28 px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm bg-white transition-all">
+                        <button type="submit"
+                            class="px-6 py-3 bg-espresso text-gold font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-roast transition-all border border-gold/30">Check</button>
+                    </form>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <p class="text-sm text-warmBrown">Already have a TBC Gift Card? <button
+                            onclick="showToast('Reload Card', 'You can reload your existing card at any TBC counter or online.')"
+                            class="text-gold font-bold hover:underline">Reload it here</button></p>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="page-social" class="page-view hidden animate-fadeInUp py-12 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-beige/40 pb-6 mb-8 flex flex-wrap gap-3">
+                    <button onclick="switchSocialTab('people')" id="social-tab-people"
+                        class="social-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-roast text-gold transition-all shadow-sm">People</button>
+                    <button onclick="switchSocialTab('planet')" id="social-tab-planet"
+                        class="social-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-warmBrown hover:bg-beige/40 transition-all">Planet</button>
+                    <button onclick="switchSocialTab('stability')" id="social-tab-stability"
+                        class="social-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-warmBrown hover:bg-beige/40 transition-all">Environmental Stability</button>
+                </div>
+
+                <div id="social-content-people" class="social-subcontent space-y-8 animate-fadeInUp">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <span class="px-3 py-1 bg-softCream text-espresso text-xs font-bold uppercase tracking-wider rounded-full border border-gold/30 shadow-sm">Community First</span>
+                            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Empowering People & Communities</h2>
+                            <p class="text-warmBrown font-medium leading-relaxed">At The Bidholi Corner, people are at the core of everything we do. From fair treatment and ethical sourcing with mountain farming communities across Bidholi and Kandoli to supporting student creators under Team Code Minds, we foster an inclusive, welcoming third-place environment near campus.</p>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="People and Community" class="w-full h-96 object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="social-content-planet" class="social-subcontent hidden space-y-8 animate-fadeInUp">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="Planet Protection" class="w-full h-96 object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <div class="space-y-6">
+                            <span class="px-3 py-1 bg-softCream text-espresso text-xs font-bold uppercase tracking-wider rounded-full border border-gold/30 shadow-sm">Ecological Footprint</span>
+                            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Protecting Our Planet</h2>
+                            <p class="text-warmBrown font-medium leading-relaxed">We take proactive steps to minimize our environmental impact. This includes utilizing biodegradable packaging materials, encouraging the use of reusable ceramic mugs, and offering eco-conscious merchandise like organic jute totes to reduce single-use plastic waste.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="social-content-stability" class="social-subcontent hidden space-y-8 animate-fadeInUp">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <span class="px-3 py-1 bg-softCream text-espresso text-xs font-bold uppercase tracking-wider rounded-full border border-gold/30 shadow-sm">Sustainable Future</span>
+                            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Long-Term Environmental Stability</h2>
+                            <p class="text-warmBrown font-medium leading-relaxed">Our commitment extends to long-term environmental stability through energy-efficient café operations, comprehensive waste reduction strategies, and responsible supply chain frameworks designed to protect local natural resources around Dehradun.</p>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80" alt="Environmental Stability" class="w-full h-96 object-cover hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-reviews" class="page-view hidden animate-fadeInUp py-16 bg-softCream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="flex justify-center mb-10">
+                    <div class="inline-flex bg-white border border-beige/50 rounded-full p-1.5 shadow-sm">
+                        <button type="button" onclick="switchReviewsTab('reviews')" id="reviews-tab-reviews"
+                            class="reviews-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-roast text-gold transition-all shadow-sm">
+                            <i class="fa-solid fa-comments mr-1.5"></i> Guest Reviews
+                        </button>
+                        <button type="button" onclick="switchReviewsTab('feedback')" id="reviews-tab-feedback"
+                            class="reviews-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-warmBrown hover:text-espresso transition-all">
+                            <i class="fa-solid fa-star mr-1.5"></i> Leave Feedback
+                        </button>
+                    </div>
+                </div>
+
+                <div id="reviews-content-reviews" class="reviews-subcontent animate-fadeInUp">
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-espresso">What Guests Are Saying</h1>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="guest-reviews-grid">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm luxury-card border border-beige/30">
+                            <p class="text-espresso/90 text-sm italic leading-relaxed">"The Hazelnut Cappuccino and
+                                Peach Iced Tea are absolute game changers near campus! Such a cozy environment."</p>
+                            <p class="mt-4 font-bold text-espresso text-sm">— Lakshya Vijayvargiya</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm luxury-card border border-beige/30">
+                            <p class="text-espresso/90 text-sm italic leading-relaxed">"Amazing vibe, beautiful
+                                aesthetic lighting, and the wood-fired pizzas are top-notch. Highly recommended."</p>
+                            <p class="mt-4 font-bold text-espresso text-sm">— Jiya Khadge</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm luxury-card border border-beige/30">
+                            <p class="text-espresso/90 text-sm italic leading-relaxed">"Great spot to hang out with
+                                friends after classes. Their Chinese noodles and cold brews are incredible."</p>
+                            <p class="mt-4 font-bold text-espresso text-sm">— Riddhi Shrivastav</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm luxury-card border border-beige/30">
+                            <p class="text-espresso/90 text-sm italic leading-relaxed">"A hidden gem in Bidholi! The
+                                service is quick and the pasta dishes taste wonderfully authentic."</p>
+                            <p class="mt-4 font-bold text-espresso text-sm">— Kunal Dhaka</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reviews-content-feedback" class="reviews-subcontent hidden animate-fadeInUp">
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-espresso">Share Your Experience</h1>
+                        <p class="text-warmBrown mt-2 text-sm sm:text-base">We'd love to hear how your visit to The
+                            Bidholi Corner went.</p>
+                    </div>
+                    <div class="max-w-xl mx-auto bg-white p-8 sm:p-10 rounded-3xl shadow-lg border border-beige/40">
+                        <form onsubmit="handleFeedbackSubmit(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-warmBrown mb-2 text-center">Your
+                                    Rating</label>
+                                <div class="flex justify-center gap-2" id="feedback-star-rating">
+                                    <button type="button" onclick="setFeedbackRating(1)"
+                                        class="feedback-star text-3xl text-beige hover:scale-125 transition-transform"
+                                        data-value="1"><i class="fa-solid fa-star"></i></button>
+                                    <button type="button" onclick="setFeedbackRating(2)"
+                                        class="feedback-star text-3xl text-beige hover:scale-125 transition-transform"
+                                        data-value="2"><i class="fa-solid fa-star"></i></button>
+                                    <button type="button" onclick="setFeedbackRating(3)"
+                                        class="feedback-star text-3xl text-beige hover:scale-125 transition-transform"
+                                        data-value="3"><i class="fa-solid fa-star"></i></button>
+                                    <button type="button" onclick="setFeedbackRating(4)"
+                                        class="feedback-star text-3xl text-beige hover:scale-125 transition-transform"
+                                        data-value="4"><i class="fa-solid fa-star"></i></button>
+                                    <button type="button" onclick="setFeedbackRating(5)"
+                                        class="feedback-star text-3xl text-beige hover:scale-125 transition-transform"
+                                        data-value="5"><i class="fa-solid fa-star"></i></button>
+                                </div>
+                                <p class="text-center text-xs text-warmBrown/70 mt-2" id="feedback-rating-label">Tap a
+                                    star to rate</p>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Your
+                                        Name</label>
+                                    <input type="text" id="feedback-name" required placeholder="Your Name"
+                                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Email
+                                        (optional)</label>
+                                    <input type="email" placeholder="you@outlook.com or you@gmail.com"
+                                        pattern="[a-z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|live\.com|[a-z0-9.-]+\.[a-z]{2,})$"
+                                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Your
+                                    Feedback</label>
+                                <textarea rows="4" id="feedback-text" required
+                                    placeholder="Tell us what you loved, or what we can do better..."
+                                    class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full py-3.5 bg-roast text-gold font-bold text-xs uppercase tracking-wider rounded-full hover:bg-espresso hover:shadow-xl transition-all duration-300 border border-gold/30">
+                                <i class="fa-solid fa-paper-plane mr-1.5"></i> Submit Feedback
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="page-contact" class="page-view hidden animate-fadeInUp py-16 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-gold font-semibold uppercase tracking-widest text-xs">Reach Out To Us</span>
+                    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-espresso mt-1">Visit & Contact Us</h1>
+                    <p class="text-warmBrown text-sm sm:text-base mt-2">Reserve a table, place an inquiry, or just pop
+                        in to say hello!</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-white p-6 rounded-2xl border border-beige/40 shadow-sm flex items-start gap-4 luxury-card">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gold/20 flex items-center justify-center text-roast text-xl flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-espresso">Bidholi Outlet</h4>
+                                <p class="text-sm text-warmBrown mt-1">Near UPES Campus, Bidholi, Dehradun, Uttarakhand - 248007</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-beige/40 shadow-sm flex items-start gap-4 luxury-card">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gold/20 flex items-center justify-center text-roast text-xl flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-espresso">Kandoli Outlet</h4>
+                                <p class="text-sm text-warmBrown mt-1">Main Kandoli Road, Near Knowledge Park, Dehradun, Uttarakhand - 248007</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-beige/40 shadow-sm flex items-start gap-4 luxury-card">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gold/20 flex items-center justify-center text-roast text-xl flex-shrink-0">
+                                <i class="fa-solid fa-envelope text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-espresso">Email Us</h4>
+                                <p class="text-sm text-warmBrown mt-1">contact@thebidholicorner.com</p>
+                                <p class="text-xs text-gold font-medium mt-0.5">Project Group: Code Minds</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-beige/40 shadow-sm flex items-start gap-4 luxury-card">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gold/20 flex items-center justify-center text-roast text-xl flex-shrink-0">
+                                <i class="fa-solid fa-phone text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-espresso">Phone & WhatsApp</h4>
+                                <p class="text-sm text-warmBrown mt-1">+91 98765 43210</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-beige/40 shadow-md">
+                        <h3 class="font-serif text-2xl font-bold text-espresso mb-6">Book a Table / Send Query</h3>
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div><label class="block text-xs font-semibold uppercase text-warmBrown mb-1">Your
+                                        Name</label><input type="text" required placeholder="John Doe"
+                                        class="w-full px-4 py-3 rounded-xl border border-beige/60 focus:outline-none focus:border-gold text-sm bg-cream/30 transition-all">
+                                </div>
+                                <div><label class="block text-xs font-semibold uppercase text-warmBrown mb-1">Email
+                                        Address</label><input type="email" required placeholder="john@outlook.com or john@gmail.com"
+                                        pattern="[a-z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|live\.com|[a-z0-9.-]+\.[a-z]{2,})$"
+                                        class="w-full px-4 py-3 rounded-xl border border-beige/60 focus:outline-none focus:border-gold text-sm bg-cream/30 transition-all">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div><label class="block text-xs font-semibold uppercase text-warmBrown mb-1">Phone
+                                        Number</label><input type="tel" required placeholder="+91 98765..."
+                                        class="w-full px-4 py-3 rounded-xl border border-beige/60 focus:outline-none focus:border-gold text-sm bg-cream/30 transition-all">
+                                </div>
+                                <div><label
+                                        class="block text-xs font-semibold uppercase text-warmBrown mb-1">Date</label><input
+                                        type="date" required
+                                        class="w-full px-4 py-3 rounded-xl border border-beige/60 focus:outline-none focus:border-gold text-sm bg-cream/30 transition-all">
+                                </div>
+                                <div><label class="block text-xs font-semibold uppercase text-warmBrown mb-1">Location</label><select
+                                        class="w-full px-4 py-3 rounded-xl border border-beige/60 focus:outline-none focus:border-gold text-sm bg-cream/30 transition-all">
+                                        <option>Bidholi Outlet</option>
+                                        <option>Kandoli Outlet</option>
+                                    </select></div>
+                            </div>
+                            <div><label class="block text-xs font-semibold uppercase text-warmBrown mb-1">Special
+                                    Requests / Message</label><textarea rows="3"
+                                    placeholder="Tell us if you need window seating or birthday setup..."
+                                    class="w-full px-4 py-3 rounded-xl border border-beige/60 focus:outline-none focus:border-gold text-sm bg-cream/30 transition-all"></textarea>
+                            </div>
+                            <button type="submit"
+                                class="w-full py-3.5 bg-roast hover:bg-espresso text-gold font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"><i
+                                    class="fa-solid fa-paper-plane"></i> Submit Reservation Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-about" class="page-view hidden animate-fadeInUp py-12 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-beige/40 pb-6 mb-8 flex flex-wrap gap-3">
+                    <button onclick="switchAboutTab('company')" id="about-tab-company"
+                        class="about-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-roast text-gold transition-all shadow-sm">Our
+                        Company</button>
+                    <button onclick="switchAboutTab('coffee')" id="about-tab-coffee"
+                        class="about-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-warmBrown hover:bg-beige/40 transition-all">Our
+                        Coffee</button>
+                    <button onclick="switchAboutTab('tbc')" id="about-tab-tbc"
+                        class="about-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-warmBrown hover:bg-beige/40 transition-all">About
+                        TBC</button>
+                    <button onclick="switchAboutTab('investors')" id="about-tab-investors"
+                        class="about-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-warmBrown hover:bg-beige/40 transition-all">Investor
+                        Relations</button>
+                    <button onclick="switchAboutTab('members')" id="about-tab-members"
+                        class="about-sub-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-warmBrown hover:bg-beige/40 transition-all">Project
+                        Members</button>
+                </div>
+
+                <div id="about-content-company" class="about-subcontent space-y-8 animate-fadeInUp">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <span class="inline-block px-3 py-1 bg-gold/20 text-espresso text-xs font-bold uppercase tracking-widest rounded-full border border-gold/40 shadow-sm">Established 2024 · Dehradun</span>
+                            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Our Heritage, Mission & Evolution</h2>
+                            <p class="text-warmBrown font-medium leading-relaxed">Since 2024, The Bidholi Corner (TBC) has grown from a humble campus dream into a beloved culinary landmark near UPES Dehradun. Spanning dual energetic hubs in Bidholi and Kandoli, our foundation rests on creating a genuine "third place"—where academic pursuits blend effortlessly with slow coffee rituals and warm social connection.</p>
+                            <p class="text-warmBrown font-medium leading-relaxed">Our philosophy treats hospitality as an art form: combining artisanal bean profiling with multi-cuisine comfort favorites (from wood-fired sourdough pizzas to wok-tossed Asian street plates). Driven by Team Code Minds, we bridge physical comfort with digital-forward convenience, serving thousands of students, faculty, and travelers with consistency, warmth, and uncompromised quality.</p>
+                            <div class="grid grid-cols-3 gap-4 pt-4 border-t border-beige/40">
+                                <div>
+                                    <p class="font-serif text-2xl font-bold text-espresso">2024</p>
+                                    <p class="text-xs text-warmBrown">Legacy Founded</p>
+                                </div>
+                                <div>
+                                    <p class="font-serif text-2xl font-bold text-espresso">2 Outlets</p>
+                                    <p class="text-xs text-warmBrown">Bidholi & Kandoli</p>
+                                </div>
+                                <div>
+                                    <p class="font-serif text-2xl font-bold text-espresso">50K+</p>
+                                    <p class="text-xs text-warmBrown">Cups Served</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white"><img
+                                src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80"
+                                alt="Company Heritage" class="w-full h-96 object-cover hover:scale-105 transition-transform duration-700"></div>
+                    </div>
+                </div>
+
+                <div id="about-content-coffee" class="about-subcontent hidden space-y-8 animate-fadeInUp">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="rounded-3xl overflow-hidden shadow-xl border-4 border-white"><img
+                                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80"
+                                alt="Our Coffee" class="w-full h-96 object-cover hover:scale-105 transition-transform duration-700"></div>
+                        <div class="space-y-6">
+                            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Ethically Sourced &
+                                Expertly Roasted</h2>
+                            <p class="text-warmBrown font-medium leading-relaxed">We are committed to 100% ethically
+                                sourced Arabica coffee beans. Working directly with sustainable mountain farmers, our
+                                roasters bring out the rich caramel and chocolate notes in every batch.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="about-content-tbc" class="about-subcontent hidden space-y-8 animate-fadeInUp">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Built by Team Code Minds
+                            </h2>
+                            <p class="text-warmBrown font-medium leading-relaxed">The Bidholi Corner website and digital
+                                platform was architected as an immersive web showcase by student creators under Team
+                                Code Minds.</p>
+                        </div>
+                        <div class="bg-softCream p-8 rounded-3xl border border-gold/30 shadow-sm luxury-card">
+                            <h3 class="font-serif text-2xl font-bold text-espresso mb-4">Project Highlights</h3>
+                            <ul class="space-y-3 text-sm text-warmBrown font-medium">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i>
+                                    Multi-location management (Bidholi & Kandoli)</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i>
+                                    Gift card balance checking system</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Fully
+                                    responsive warm coffeehouse UI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="about-content-investors" class="about-subcontent hidden space-y-8 animate-fadeInUp">
+                    <div
+                        class="bg-white p-8 sm:p-12 rounded-3xl shadow-lg border border-beige/40 text-center max-w-3xl mx-auto space-y-6 luxury-card">
+                        <div
+                            class="w-16 h-16 rounded-full bg-softCream text-roast flex items-center justify-center mx-auto text-2xl border border-gold/40">
+                            <i class="fa-solid fa-chart-line text-gold"></i>
+                        </div>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Investor Relations & Growth</h2>
+                        <p class="text-warmBrown font-medium leading-relaxed">The Bidholi Corner brand is expanding
+                            rapidly across student hubs and urban lifestyle centers. For partnership inquiries,
+                            franchise requests, and financial disclosures, contact our corporate relations desk.</p>
+                        <a href="mailto:thebidholicorner2024@gmail.com"
+                            class="inline-block px-8 py-3.5 bg-roast text-gold font-bold text-xs uppercase tracking-wider rounded-full hover:bg-espresso hover:shadow-xl transition-all duration-300 border border-gold/30">
+                            Download Investor Deck
+                        </a>
+                    </div>
+                </div>
+
+                <div id="about-content-members" class="about-subcontent hidden space-y-8 animate-fadeInUp">
+                    <div class="text-center max-w-2xl mx-auto mb-4">
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-espresso">Project Group: Code Minds
+                        </h2>
+                        <p class="text-warmBrown mt-2 text-sm sm:text-base">Meet the student members behind the
+                            conceptualization and development.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm text-center luxury-card border border-beige/30">
+                            <h4 class="font-serif text-lg font-bold text-espresso">Team Member 1</h4>
+                            <p class="text-xs font-bold uppercase tracking-wider text-gold mt-1">Team Lead</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm text-center luxury-card border border-beige/30">
+                            <h4 class="font-serif text-lg font-bold text-espresso">Team Member 2</h4>
+                            <p class="text-xs font-bold uppercase tracking-wider text-gold mt-1">UI/UX Designer</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm text-center luxury-card border border-beige/30">
+                            <h4 class="font-serif text-lg font-bold text-espresso">Team Member 3</h4>
+                            <p class="text-xs font-bold uppercase tracking-wider text-gold mt-1">Frontend Dev</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm text-center luxury-card border border-beige/30">
+                            <h4 class="font-serif text-lg font-bold text-espresso">Team Member 4</h4>
+                            <p class="text-xs font-bold uppercase tracking-wider text-gold mt-1">Content Lead</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Menu Item Details Modal -->
+    <div id="menu-detail-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeMenuModal()"></div>
+        <div class="relative bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl z-10 border border-beige/45 animate-fadeInUp overflow-hidden">
+            <button onclick="closeMenuModal()" class="absolute top-4 right-4 text-warmBrown hover:text-espresso"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div id="modal-content-inner">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-espresso text-cream pt-16 pb-12 mt-20 border-t border-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gold/20 text-gold flex items-center justify-center font-bold border border-gold/40">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-cream">The Bidholi Corner</span>
+                    </div>
+                    <p class="text-xs text-beige/80 leading-relaxed max-w-sm">A multi-cuisine culinary haven and cozy
+                        coffeehouse experience located across Bidholi and Kandoli, Dehradun. Proudly crafted by Team Code Minds.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-gold mb-4">About Us</h4>
+                    <ul class="space-y-2 text-xs text-beige">
+                        <li><button onclick="switchPage('about'); switchAboutTab('company')"
+                                class="hover:text-gold transition-colors">Our Company</button></li>
+                        <li><button onclick="switchPage('about'); switchAboutTab('coffee')"
+                                class="hover:text-gold transition-colors">Our Coffee</button></li>
+                        <li><button onclick="switchPage('about'); switchAboutTab('tbc')"
+                                class="hover:text-gold transition-colors">About TBC</button></li>
+                        <li><button onclick="switchPage('about'); switchAboutTab('investors')"
+                                class="hover:text-gold transition-colors">Investor Relations</button></li>
+                        <li><button onclick="switchPage('about'); switchAboutTab('members')"
+                                class="hover:text-gold transition-colors">Project Members</button></li>
+                        <li><button onclick="switchPage('reviews')" class="hover:text-gold transition-colors">Customer
+                                Reviews</button></li>
+                        <li><button onclick="switchPage('contact')" class="hover:text-gold transition-colors">Contact
+                                Us</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-gold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-beige">
+                        <li><button onclick="switchPage('menu')" class="hover:text-gold transition-colors">Order
+                                Online</button></li>
+                        <li><button onclick="showToast('Order History', 'Please sign in to view your past orders.')" class="hover:text-gold transition-colors">Order
+                                History</button></li>
+                        <li><button onclick="switchPage('rewards')" class="hover:text-gold transition-colors">TBC
+                                Rewards</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-gold mb-4">Social Impact</h4>
+                    <ul class="space-y-2 text-xs text-beige">
+                        <li><button onclick="switchPage('social'); switchSocialTab('people')" class="hover:text-gold transition-colors text-left">People</button></li>
+                        <li><button onclick="switchPage('social'); switchSocialTab('planet')" class="hover:text-gold transition-colors text-left">Planet</button></li>
+                        <li><button onclick="switchPage('social'); switchSocialTab('stability')" class="hover:text-gold transition-colors text-left">Environmental Stability</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-beige/80 gap-4">
+                <p>© 2026 The Bidholi Corner. All Rights Reserved. Crafted by Team Code Minds.</p>
+                <div class="flex justify-end space-x-6 text-gold w-full">
+                    <a href="https://www.instagram.com/bidholicorner.tbc/?utm_source=ig_web_button_share_sheet" target="_blank" class="hover:text-white transition-transform hover:scale-110">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="https://snapchat.com/t/6LQ5ewCQ" target="_blank" class="hover:text-white transition-transform hover:scale-110">
+                        <i class="fa-brands fa-snapchat text-lg"></i>
+                    </a>
+                    <a href="https://wa.me/7850092458" target="_blank" class="hover:text-white transition-transform hover:scale-110">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div id="cart-backdrop" class="absolute inset-0 bg-black/60 transition-opacity opacity-0 backdrop-blur-sm duration-300" onclick="toggleCartDrawer(false)">
+        </div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="cart-drawer-panel" class="w-screen max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full duration-300">
+                <div class="p-6 bg-espresso text-cream flex items-center justify-between border-b border-gold/30">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-gold"></i>
+                        <h3 class="font-serif text-xl font-bold">Your TBC Order Bag</h3>
+                    </div>
+                    <button onclick="toggleCartDrawer(false)" class="text-beige hover:text-white transition-colors"><i
+                            class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+
+                <div class="flex-grow overflow-y-auto p-6 space-y-4" id="cart-items-container"></div>
+
+                <div class="p-6 border-t border-beige/40 bg-softCream space-y-4">
+                    <div class="flex justify-between text-sm font-bold text-warmBrown"><span>Subtotal:</span><span
+                            id="cart-subtotal">₹0</span></div>
+                    <div class="flex justify-between text-xs text-warmBrown/80"><span>Taxes & Packaging
+                            (5%):</span><span id="cart-tax">₹0</span></div>
+                    <div
+                        class="flex justify-between text-lg font-serif font-bold text-espresso pt-2 border-t border-beige/40">
+                        <span>Total:</span><span id="cart-total">₹0</span>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <label class="block text-xs font-bold uppercase text-warmBrown">Select Payment Method</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="selectPaymentMethod('upi')" id="pay-btn-upi"
+                                class="pay-method-btn px-3 py-2 rounded-xl text-xs font-bold border-2 border-gold bg-white text-espresso flex items-center gap-2 transition-all shadow-sm">
+                                <i class="fa-solid fa-mobile-screen-button text-gold"></i> UPI App
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('card')" id="pay-btn-card"
+                                class="pay-method-btn px-3 py-2 rounded-xl text-xs font-bold border-2 border-beige bg-white text-warmBrown flex items-center gap-2 transition-all">
+                                <i class="fa-solid fa-credit-card text-gold"></i> Card (Cr/Dr)
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('qr')" id="pay-btn-qr"
+                              class="pay-method-btn px-3 py-2 rounded-xl text-xs font-bold border-2 border-beige bg-white text-warmBrown flex items-center gap-2 transition-all">
+                              <i class="fa-solid fa-qrcode text-gold"></i> Scan QR
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('netbanking')" id="pay-btn-netbanking"
+                                class="pay-method-btn px-3 py-2 rounded-xl text-xs font-bold border-2 border-beige bg-white text-warmBrown flex items-center gap-2 transition-all">
+                                <i class="fa-solid fa-building-columns text-gold"></i> Net Banking
+                            </button>
+                        </div>
+
+                        <div id="qr-display" class="hidden mt-4 flex flex-col items-center justify-center">
+                          <img src="images/lakshay-qr.jpeg" alt="Lakshay Vijayvargiya QR Code"
+                               class="w-48 h-48 rounded-lg object-cover shadow-lg transition-opacity duration-500 ease-in-out opacity-0"
+                               id="qr-img" />
+                          <p class="text-[11px] text-warmBrown font-medium mt-2">
+                            Scan with GPay, PhonePe, or Paytm
+                          </p>
+                        </div>
+
+                        <div id="payment-input-container" class="pt-2">
+                            <input type="text" id="payment-detail-input" placeholder="Enter UPI ID (e.g., name@okhdfcbank)" class="w-full px-3 py-2 text-xs rounded-lg border border-beige bg-white focus:outline-none focus:border-gold">
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 pt-2">
+                        <button onclick="processCheckout()"
+                            class="flex-1 py-3.5 bg-roast hover:bg-espresso text-gold font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 transform hover:-translate-y-0.5 border border-gold/40">
+                            <i class="fa-solid fa-lock text-sm"></i> Pay Securely
+                        </button>
+                        <button onclick="checkoutWhatsApp()"
+                            class="px-4 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-1.5" title="Checkout via WhatsApp">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/70 backdrop-blur-md p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border-2 border-gold animate-successPop relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-gold/20 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-roast/10 rounded-full blur-2xl"></div>
+
+            <div class="w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-5 text-4xl shadow-inner animate-bounce">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            
+            <h3 class="font-serif text-3xl font-bold text-espresso mb-2">Payment Successful! 🎉</h3>
+            <p class="text-sm text-warmBrown mb-4">Your order has been placed successfully and sent to our kitchen. Get ready for a delicious treat!</p>
+
+            <div class="bg-softCream p-4 rounded-2xl mb-6 border border-gold/30 text-xs text-espresso space-y-1">
+                <p><strong>Order ID:</strong> #TBC-<span id="success-order-id">8492</span></p>
+                <p><strong>Estimated Preparation:</strong> 15-20 mins</p>
+                <p class="text-gold font-bold mt-2">⭐ You earned 45 TBC Stars with this order!</p>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full py-3 bg-roast hover:bg-espresso text-gold font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                Awesome, Back to Cafe
+            </button>
+        </div>
+    </div>
+
+    <!-- Store Locator Modal -->
+    <div id="store-locator-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeStoreLocator()"></div>
+        <div class="relative bg-white rounded-3xl max-w-2xl w-full p-8 shadow-2xl z-10 border border-beige/45 animate-fadeInUp">
+            <button onclick="closeStoreLocator()" class="absolute top-4 right-4 text-warmBrown hover:text-espresso"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-softCream text-gold flex items-center justify-center mx-auto mb-3 border border-gold/40">
+                    <i class="fa-solid fa-location-dot text-xl text-roast"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-espresso">Our Café Locations</h3>
+                <p class="text-xs text-warmBrown mt-1">Visit us at any of our two premium campus outlets in Dehradun.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="p-5 bg-softCream rounded-2xl border border-gold/30">
+                    <h4 class="font-serif text-lg font-bold text-espresso flex items-center gap-2"><i class="fa-solid fa-mug-hot text-gold"></i> Bidholi Outlet</h4>
+                    <p class="text-xs text-warmBrown mt-2">Near UPES Campus, Bidholi, Dehradun, Uttarakhand - 248007</p>
+                    <p class="text-xs text-gold font-semibold mt-3">Open: 8:00 AM - 10:30 PM</p>
+                </div>
+                <div class="p-5 bg-softCream rounded-2xl border border-gold/30">
+                    <h4 class="font-serif text-lg font-bold text-espresso flex items-center gap-2"><i class="fa-solid fa-mug-hot text-gold"></i> Kandoli Outlet</h4>
+                    <p class="text-xs text-warmBrown mt-2">Main Kandoli Road, Near Knowledge Park, Dehradun, Uttarakhand - 248007</p>
+                    <p class="text-xs text-gold font-semibold mt-3">Open: 8:00 AM - 10:30 PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeAuthModal()"></div>
+        <div class="relative bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl z-10 border border-beige/45 animate-fadeInUp">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-warmBrown hover:text-espresso"><i
+                    class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="text-center mb-6">
+                <div
+                    class="w-12 h-12 rounded-full bg-softCream text-gold flex items-center justify-center mx-auto mb-3 border border-gold/40">
+                    <i class="fa-solid fa-mug-hot text-xl text-roast"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-espresso" id="auth-title">Sign In to TBC</h3>
+                <p class="text-xs text-warmBrown mt-1" id="auth-subtitle">Access your stars, rewards, and saved orders.</p>
+            </div>
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div id="auth-username-field" class="hidden">
+                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Username</label>
+                    <input type="text" id="auth-input-username" placeholder="username123"
+                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1" id="auth-email-label">Your Name / Email</label>
+                    <input type="email" id="auth-input-name" required placeholder="aarav@outlook.com or aarav@gmail.com"
+                        pattern="[a-z0-9._%+-]+@(gmail\.com|outlook\.com|hotmail\.com|live\.com|[a-z0-9.-]+\.[a-z]{2,})$"
+                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Password</label>
+                    <input type="password" id="auth-input-password" required placeholder="••••••••"
+                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                </div>
+                <div id="auth-confirm-password-field" class="hidden">
+                    <label class="block text-xs font-bold uppercase text-warmBrown mb-1">Confirm Password</label>
+                    <input type="password" id="auth-input-confirm" placeholder="••••••••"
+                        class="w-full px-4 py-3 rounded-xl border border-beige focus:outline-none focus:border-gold text-sm transition-all">
+                </div>
+                <button type="submit" id="auth-submit-btn"
+                    class="w-full py-3.5 bg-roast text-gold font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-espresso hover:shadow-xl transition-all border border-gold/30">Sign
+                    In</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-modal"
+        class="fixed bottom-6 right-6 bg-roast text-cream border-2 border-gold p-4 rounded-2xl shadow-2xl z-50 transform translate-y-32 opacity-0 transition-all duration-400 flex items-center gap-3">
+        <div class="p-2 bg-gold text-espresso rounded-full"><i class="fa-solid fa-check text-sm"></i></div>
+        <div>
+            <h5 class="font-bold text-gold text-sm" id="toast-title">Success!</h5>
+            <p class="text-xs text-beige" id="toast-message">Item added to your order.</p>
+        </div>
+    </div>
+
+    <script>
+        const catalogItems = [
+            {
+                id: 1, 
+                name: "Hazelnut Cappuccino", 
+                category: "coffee", 
+                price: 160, 
+                image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80", 
+                tag: "Bestseller",
+                ingredients: ["Fresh Espresso Shot", "Steamed Whole Milk", "Velvety Milk Foam", "Artisanal Hazelnut Syrup", "Cocoa Powder Dusting"]
+            },
+            {
+                id: 2, 
+                name: "Iced Caramel Macchiato", 
+                category: "coffee", 
+                price: 180, 
+                image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80", 
+                tag: "Popular",
+                ingredients: ["Vanilla Syrup", "Chilled Milk", "Ice Cubes", "Rich Espresso Shots", "Buttery Caramel Drizzle"]
+            },
+            {
+                id: 3, 
+                name: "Artisan Cold Brew", 
+                category: "coffee", 
+                price: 150, 
+                image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80", 
+                tag: "Smooth",
+                ingredients: ["Single-Origin Arabica Coffee Beans", "Filtered Cold Water", "Steeped for 18 Hours", "Served Over Crystal Ice"]
+            },
+            {
+                id: 24, 
+                name: "Classic Espresso Shot", 
+                category: "coffee", 
+                price: 110, 
+                image: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80", 
+                tag: "Bold",
+                ingredients: ["Fine Arabica Coffee Grounds", "High-Pressure Pure Hot Water", "Rich Crema Layer"]
+            },
+            {
+                id: 25, 
+                name: "Velvety Cafe Latte", 
+                category: "coffee", 
+                price: 150, 
+                image: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=600&q=80", 
+                tag: "Smooth",
+                ingredients: ["Signature Espresso Shot", "Steamed Microfoam Milk", "Light Layer of Foamed Milk"]
+            },
+            {
+                id: 26, 
+                name: "Rich Mocha Frappe", 
+                category: "coffee", 
+                price: 195, 
+                image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80", 
+                tag: "Chilled",
+                ingredients: ["Blended Espresso", "Rich Chocolate Ganache", "Chilled Milk", "Crushed Ice", "Whipped Cream Topping"]
+            },
+            {
+                id: 4, 
+                name: "Veg Hakka Noodles", 
+                category: "chinese", 
+                price: 170, 
+                image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80", 
+                tag: "Spicy",
+                ingredients: ["Boiled Noodles", "Julienned Cabbage", "Carrots & Capsicum", "Soy Sauce & Vinegar", "Wok Tossed Garlic & Chili"]
+            },
+            {
+                id: 5, 
+                name: "Chilli Paneer Dry", 
+                category: "chinese", 
+                price: 210, 
+                image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80", 
+                tag: "Chef Choice",
+                ingredients: ["Fresh Cottage Cheese Cubes", "Bell Peppers & Onions", "Green Chilies", "Soy-Garlic Sauce", "Spring Onion Garnish"]
+            },
+            {
+                id: 6, 
+                name: "Crispy Masala Dosa", 
+                category: "south-indian", 
+                price: 150, 
+                image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80", 
+                tag: "Classic",
+                ingredients: ["Fermented Rice & Lentil Batter", "Spiced Potato Masala", "Clarified Butter (Ghee)", "Served with Coconut Chutney & Sambar"]
+            },
+            {
+                id: 7, 
+                name: "Ghee Button Idli", 
+                category: "south-indian", 
+                price: 130, 
+                image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80", 
+                tag: "Desi Ghee",
+                ingredients: ["Mini Steamed Rice Idlis", "Aromatic South Indian Podi Masala", "Pure Country Ghee Toss", "Fresh Curry Leaves"]
+            },
+            {
+                id: 8, 
+                name: "Butter Paneer & Naan", 
+                category: "north-indian", 
+                price: 260, 
+                image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80", 
+                tag: "Royal",
+                ingredients: ["Paneer Cubes in Rich Tomato-Butter Gravy", "Fresh Cream", "Fenugreek Leaves (Kasoori Methi)", "Tandoor Baked Butter Naan"]
+            },
+            {
+                id: 9, 
+                name: "Dal Makhani Special", 
+                category: "north-indian", 
+                price: 220, 
+                image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80", 
+                tag: "Slow Cooked",
+                ingredients: ["Whole Black Lentils (Urad Dal)", "Kidney Beans", "Butter & Fresh Cream", "Simmered Overnight on Slow Charcoal Fire"]
+            },
+            {
+                id: 10, 
+                name: "Bidholi Veggie Pizza", 
+                category: "pizza", 
+                price: 290, 
+                image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80", 
+                tag: "Signature",
+                ingredients: ["Hand-stretched Sourdough Crust", "San Marzano Tomato Sauce", "Mozzarella Cheese", "Bell Peppers, Olives, Corn & Jalapeños"]
+            },
+            {
+                id: 11, 
+                name: "Sizzling Brownie", 
+                category: "pastries", 
+                price: 190, 
+                image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80", 
+                tag: "Must Try",
+                ingredients: ["Fudgy Chocolate Walnut Brownie", "Hot Iron Sizzler Plate", "Vanilla Bean Ice Cream Scoop", "Warm Chocolate Fudge Drizzle"]
+            },
+            {
+                id: 12, 
+                name: "Blueberry Cheesecake", 
+                category: "pastries", 
+                price: 210, 
+                image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80", 
+                tag: "Fresh",
+                ingredients: ["Buttery Graham Cracker Crust", "Rich Cream Cheese Filling", "Sweet Blueberry Compote Topping", "Fresh Mint Leaf"]
+            },
+            {id: 13, name: "TBC Signature Arabica Beans 250g", category: "shop", subcat: "beans", price: 450, image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80", tag: "Whole Bean"},
+            {id: 27, name: "TBC Chocolate Infused Arabica Beans 250g", category: "shop", subcat: "beans", price: 490, image: "https://images.unsplash.com/coffee&w=600&q=80", tag: "Flavored Bean", ingredients: ["Single-Origin Arabica Beans", "Natural Cocoa Nibs Infusion", "Dark Chocolate Essence"]},
+            {id: 28, name: "TBC Hazelnut Roasted Arabica Beans 250g", category: "shop", subcat: "beans", price: 490, image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80", tag: "Flavored Bean", ingredients: ["Roasted Arabica Beans", "Artisanal Hazelnut Extract", "Balanced Nutty Finish"]},
+            {id: 29, name: "TBC Caramel Glazed Arabica Beans 250g", category: "shop", subcat: "beans", price: 490, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80", tag: "Flavored Bean", ingredients: ["Arabica Coffee Beans", "Natural Butter Caramel Aroma", "Sweet Aromatic Profile"]},
+            {id: 14, name: "TBC Ceramic Coffee Mug", category: "shop", subcat: "merch", price: 350, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80", tag: "Merchandise"},
+            {id: 15, name: "French Press Coffee Maker", category: "shop", subcat: "merch", price: 890, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80", tag: "Equipment"},
+            {id: 16, name: "TBC Vintage Coffee Cup Fridge Magnet", category: "shop", subcat: "magnets", price: 199, image: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80", tag: "Magnet"},
+            {id: 17, name: "TBC Campus 'Code Minds' Aesthetic Magnet", category: "shop", subcat: "magnets", price: 175, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80", tag: "Magnet"},
+            {id: 22, name: "TBC Travel Coffee Flask", category: "shop", subcat: "merch", price: 650, image: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=600&q=80", tag: "Merchandise"}
+        ];
+
+        let cart = [];
+        let selectedPaymentType = 'upi';
+        let isUserSignedIn = false;
+        let loggedInUserName = 'Member';
+        let currentAuthMode = 'signin';
+
+        let giftAmount = 250;
+        let giftDeliveryMethod = 'egift';
+        let currentGiftDesign = 'classic';
+        const giftDesignClasses = {
+            classic: ['from-espresso', 'via-roast', 'to-warmBrown'],
+            gold: ['from-gold', 'via-goldHover', 'to-warmBrown'],
+            midnight: ['from-black', 'via-espresso', 'to-roast'],
+            birthday: ['from-gold', 'via-cream', 'to-beige']
+        };
+
+        let issuedGiftCards = {
+            "TBC-8942": { balance: 500, pin: "1234" },
+            "TBC-1049": { balance: 1000, pin: "5678" }
+        };
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.add('hidden'));
+            const target = document.getElementById(`page-${pageId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                initScrollObserver();
+            }
+        }
+
+        function switchAboutTab(tabName) {
+            document.querySelectorAll('.about-subcontent').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.about-sub-btn').forEach(b => {
+                b.classList.remove('bg-roast', 'text-gold');
+                b.classList.add('bg-white', 'text-warmBrown');
+            });
+            document.getElementById(`about-content-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`about-tab-${tabName}`);
+            activeBtn.classList.remove('bg-white', 'text-warmBrown');
+            activeBtn.classList.add('bg-roast', 'text-gold');
+        }
+
+        function switchSocialTab(tabName) {
+            document.querySelectorAll('.social-subcontent').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.social-sub-btn').forEach(b => {
+                b.classList.remove('bg-roast', 'text-gold');
+                b.classList.add('bg-white', 'text-warmBrown');
+            });
+            document.getElementById(`social-content-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`social-tab-${tabName}`);
+            activeBtn.classList.remove('bg-white', 'text-warmBrown');
+            activeBtn.classList.add('bg-roast', 'text-gold');
+        }
+
+        function renderHomeFeatured() {
+            const grid = document.getElementById('home-featured-grid');
+            const featured = catalogItems.slice(0, 4);
+            grid.innerHTML = featured.map(item => `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-beige/40 flex flex-col justify-between luxury-card cursor-pointer" onclick="openMenuDetailModal(${item.id})">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-3 right-3 bg-gold text-espresso font-bold text-xs px-3 py-1 rounded-full shadow-md">${item.tag}</span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h4 class="font-serif text-xl font-bold text-espresso">${item.name}</h4>
+                            <p class="text-lg font-bold text-roast mt-1 font-serif">₹${item.price}</p>
+                        </div>
+                        <button onclick="event.stopPropagation(); addToCart(${item.id})" class="mt-4 w-full py-2.5 bg-softCream hover:bg-roast text-espresso hover:text-gold font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-300 border border-gold/30">Add to Bag</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMenuGrid(category = 'all', searchQuery = '') {
+            const grid = document.getElementById('menu-items-grid');
+            let items = catalogItems.filter(i => i.category !== 'shop');
+            if (category !== 'all') items = items.filter(i => i.category === category);
+            if (searchQuery) items = items.filter(i => i.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-warmBrown">No items found matching your search.</div>`;
+                return;
+            }
+
+            grid.innerHTML = items.map(item => `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-beige/40 flex flex-col justify-between luxury-card cursor-pointer" onclick="openMenuDetailModal(${item.id})">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-3 right-3 bg-gold text-espresso font-bold text-xs px-3 py-1 rounded-full shadow-md">${item.tag}</span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h4 class="font-serif text-xl font-bold text-espresso">${item.name}</h4>
+                            <p class="text-lg font-bold text-roast mt-1 font-serif">₹${item.price}</p>
+                            <p class="text-[11px] text-warmBrown/80 mt-1 italic"><i class="fa-solid fa-circle-info mr-1 text-gold"></i>Click to view ingredients</p>
+                        </div>
+                        <button onclick="event.stopPropagation(); addToCart(${item.id})" class="mt-4 w-full py-2.5 bg-softCream hover:bg-roast text-espresso hover:text-gold font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-300 border border-gold/30">Add to Bag</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openMenuDetailModal(itemId) {
+            const item = catalogItems.find(i => i.id === itemId);
+            if (!item) return;
+
+            const modalContent = document.getElementById('modal-content-inner');
+            const ingredientsList = item.ingredients ? item.ingredients.map(ing => `<li class="flex items-center gap-2 text-sm text-warmBrown"><i class="fa-solid fa-check text-gold text-xs"></i><span>${ing}</span></li>`).join('') : '<li class="text-sm text-warmBrown">Freshly crafted by our expert chefs.</li>';
+
+            modalContent.innerHTML = `
+                <div class="relative h-56 rounded-2xl overflow-hidden mb-5 shadow-md">
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                    <span class="absolute top-3 right-3 bg-gold text-espresso font-bold text-xs px-3 py-1 rounded-full shadow-md">${item.tag}</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="font-serif text-2xl font-bold text-espresso">${item.name}</h3>
+                        <span class="font-serif text-xl font-bold text-roast">₹${item.price}</span>
+                    </div>
+                    <p class="text-xs uppercase tracking-widest text-gold font-bold">Key Ingredients Breakdown</p>
+                    <ul class="space-y-2 bg-softCream p-4 rounded-2xl border border-gold/30">
+                        ${ingredientsList}
+                    </ul>
+                    <button onclick="addToCart(${item.id}); closeMenuModal();" class="w-full mt-4 py-3.5 bg-roast hover:bg-espresso text-gold font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 border border-gold/30">
+                        <i class="fa-solid fa-bag-shopping"></i> Add to Bag (₹${item.price})
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('menu-detail-modal').classList.remove('hidden');
+        }
+
+        function closeMenuModal() {
+            document.getElementById('menu-detail-modal').classList.add('hidden');
+        }
+
+        function selectMenuCategory(cat) {
+            document.querySelectorAll('.menu-cat-btn').forEach(b => {
+                b.classList.remove('bg-roast', 'text-gold');
+                b.classList.add('text-warmBrown', 'hover:bg-white');
+            });
+            event.target.classList.remove('text-warmBrown', 'hover:bg-white');
+            event.target.classList.add('bg-roast', 'text-gold');
+            renderMenuGrid(cat, document.getElementById('menu-search').value);
+        }
+
+        function filterMenu() {
+            renderMenuGrid('all', document.getElementById('menu-search').value);
+        }
+
+        function renderShopGrid(subcatFilter = 'all') {
+            const grid = document.getElementById('shop-items-grid');
+            let items = catalogItems.filter(i => i.category === 'shop');
+            if (subcatFilter !== 'all') {
+                items = items.filter(i => i.subcat === subcatFilter);
+            }
+            grid.innerHTML = items.map(item => `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-beige/40 flex flex-col justify-between luxury-card cursor-pointer" onclick="openMenuDetailModal(${item.id})">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-3 right-3 bg-gold text-espresso font-bold text-xs px-3 py-1 rounded-full shadow-md">${item.tag}</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h4 class="font-serif text-xl font-bold text-espresso">${item.name}</h4>
+                            <p class="text-lg font-bold text-roast mt-1 font-serif">₹${item.price}</p>
+                            <p class="text-[11px] text-warmBrown/80 mt-1 italic"><i class="fa-solid fa-circle-info mr-1 text-gold"></i>Click to view profile</p>
+                        </div>
+                        <button onclick="event.stopPropagation(); addToCart(${item.id})" class="mt-4 w-full py-3 bg-roast hover:bg-espresso text-gold font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-300 border border-gold/30">Add to Bag</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterShopCategory(subcat) {
+            renderShopGrid(subcat);
+        }
+
+        function addToCart(itemId) {
+            const item = catalogItems.find(i => i.id === itemId);
+            const existing = cart.find(c => c.id === itemId);
+            if (existing) existing.qty++;
+            else cart.push({...item, qty: 1});
+            updateCartBadge();
+            renderCartDrawer();
+            showToast("Added to Bag", `${item.name} added successfully!`);
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-badge');
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            badge.innerText = totalQty;
+            if (totalQty > 0) {
+                badge.classList.remove('scale-0');
+                badge.classList.add('scale-100');
+            } else {
+                badge.classList.add('scale-0');
+                badge.classList.remove('scale-100');
+            }
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cart-drawer');
+            const panel = document.getElementById('cart-drawer-panel');
+            const backdrop = document.getElementById('cart-backdrop');
+
+            if (open) {
+                drawer.classList.remove('hidden');
+                renderCartDrawer();
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    backdrop.classList.add('opacity-100');
+                    panel.classList.remove('translate-x-full');
+                    panel.classList.add('translate-x-0');
+                }, 10);
+            } else {
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                panel.classList.remove('translate-x-0');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    drawer.classList.add('hidden');
+                }, 400);
+            }
+        }
+
+        function renderCartDrawer() {
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-20 text-warmBrown"><i class="fa-solid fa-mug-hot text-4xl mb-3 text-beige"></i><p>Your bag is empty.</p></div>`;
+                document.getElementById('cart-subtotal').innerText = '₹0';
+                document.getElementById('cart-tax').innerText = '₹0';
+                document.getElementById('cart-total').innerText = '₹0';
+                return;
+            }
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center justify-between gap-4 p-3 bg-softCream rounded-xl border border-beige/40">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-sm text-espresso">${item.name}</h4>
+                        <p class="text-xs text-roast font-bold">₹${item.price} × ${item.qty}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 bg-white border border-beige rounded-full text-xs font-bold hover:bg-beige/40 transition-colors">-</button>
+                        <span class="text-sm font-bold text-espresso">${item.qty}</span>
+                        <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 bg-white border border-beige rounded-full text-xs font-bold hover:bg-beige/40 transition-colors">+</button>
+                    </div>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + tax;
+            document.getElementById('cart-subtotal').innerText = `₹${subtotal}`;
+            document.getElementById('cart-tax').innerText = `₹${tax}`;
+            document.getElementById('cart-total').innerText = `₹${total}`;
+        }
+
+        function changeQty(itemId, delta) {
+            const item = cart.find(c => c.id === itemId);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) cart = cart.filter(c => c.id !== itemId);
+            }
+            updateCartBadge();
+            renderCartDrawer();
+        }
+
+        function selectPaymentMethod(type) {
+            selectedPaymentType = type;
+            document.querySelectorAll('.pay-method-btn').forEach(btn => {
+                btn.classList.remove('border-gold', 'bg-softCream', 'text-espresso');
+                btn.classList.add('border-beige', 'bg-white', 'text-warmBrown');
+            });
+            const activeBtn = document.getElementById(`pay-btn-${type}`);
+            activeBtn.classList.remove('border-beige', 'bg-white', 'text-warmBrown');
+            activeBtn.classList.add('border-gold', 'bg-softCream', 'text-espresso');
+
+            const container = document.getElementById('payment-input-container');
+            const qrDisplay = document.getElementById('qr-display');
+            const qrImg = document.getElementById('qr-img');
+
+            if (type === 'qr') {
+                qrDisplay.classList.remove('hidden');
+                setTimeout(() => qrImg.classList.remove('opacity-0'), 50);
+                container.innerHTML = '';
+            } else {
+                qrDisplay.classList.add('hidden');
+                qrImg.classList.add('opacity-0');
+            }
+
+            if (type === 'upi') {
+                container.innerHTML = `<input type="text" id="payment-detail-input" placeholder="Enter UPI ID (e.g., name@okaxis)" class="w-full px-3 py-2 text-xs rounded-lg border border-beige bg-white focus:outline-none focus:border-gold">`;
+            } else if (type === 'card') {
+                container.innerHTML = `
+                    <input type="text" placeholder="Card Number (4242 •••• •••• 4242)" class="w-full px-3 py-2 text-xs rounded-lg border border-beige bg-white mb-2 focus:outline-none focus:border-gold">
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" placeholder="MM/YY" class="px-3 py-2 text-xs rounded-lg border border-beige bg-white focus:outline-none focus:border-gold">
+                        <input type="password" placeholder="CVV" maxlength="3" class="px-3 py-2 text-xs rounded-lg border border-beige bg-white focus:outline-none focus:border-gold">
+                    </div>`;
+            } else if (type === 'netbanking') {
+                container.innerHTML = `
+                    <select class="w-full px-3 py-2 text-xs rounded-lg border border-beige bg-white focus:outline-none focus:border-gold">
+                        <option>State Bank of India (SBI)</option>
+                        <option>HDFC Bank</option>
+                        <option>ICICI Bank</option>
+                        <option>Axis Bank</option>
+                        <option>Punjab National Bank</option>
+                    </select>`;
+            }
+        }
+
+        function processCheckout() {
+            if (cart.length === 0) {
+                showToast("Bag is Empty", "Add items to your bag before making a payment.");
+                return;
+            }
+            toggleCartDrawer(false);
+            setTimeout(() => {
+                document.getElementById('success-order-id').innerText = Math.floor(1000 + Math.random() * 9000);
+                document.getElementById('success-modal').classList.remove('hidden');
+                cart = [];
+                updateCartBadge();
+            }, 300);
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                showToast("Bag is Empty", "Add items to your bag before checking out.");
+                return;
+            }
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + tax;
+            let message = "Hello The Bidholi Corner! I would like to place an order:%0A%0A";
+            cart.forEach(i => {message += `• ${i.name} (Qty: ${i.qty}) - ₹${i.price * i.qty}%0A`;});
+            message += `%0ASubtotal: ₹${subtotal}%0ATaxes: ₹${tax}%0A*Total: ₹${total}*%0A%0APlease confirm my order. Thank you!`;
+            window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+        }
+
+        function selectCardDesign(designKey) {
+            document.querySelectorAll('.gift-design-btn').forEach(b => {
+                b.classList.remove('ring-gold');
+                b.classList.add('ring-transparent');
+            });
+            const btn = event.target.closest('.gift-design-btn');
+            btn.classList.remove('ring-transparent');
+            btn.classList.add('ring-gold');
+
+            const preview = document.getElementById('gift-card-preview');
+            Object.values(giftDesignClasses).forEach(classes => {
+                classes.forEach(c => preview.classList.remove(c));
+            });
+            giftDesignClasses[designKey].forEach(c => preview.classList.add(c));
+
+            if (designKey === 'birthday') {
+                preview.classList.remove('text-cream');
+                preview.classList.add('text-espresso');
+            } else {
+                preview.classList.remove('text-espresso');
+                preview.classList.add('text-cream');
+            }
+
+            currentGiftDesign = designKey;
+        }
+
+        function setGiftDeliveryMethod(method) {
+            giftDeliveryMethod = method;
+            document.querySelectorAll('.gift-delivery-btn').forEach(b => {
+                b.classList.remove('bg-roast', 'text-gold', 'shadow-sm');
+                b.classList.add('text-warmBrown');
+            });
+            const btn = event.target.closest('.gift-delivery-btn');
+            btn.classList.remove('text-warmBrown');
+            btn.classList.add('bg-roast', 'text-gold', 'shadow-sm');
+
+            const label = document.getElementById('gift-delivery-label');
+            label.innerText = method === 'physical' ? 'Shipping Address' : 'Recipient Email / WhatsApp';
+        }
+
+        function setGiftAmount(amt) {
+            giftAmount = amt;
+            const customInput = document.getElementById('gift-custom-amount');
+            if (customInput) customInput.value = '';
+            document.querySelectorAll('.gift-amt-btn').forEach(b => {
+                b.classList.remove('border-gold', 'bg-softCream', 'text-espresso', 'shadow-sm');
+                b.classList.add('border-beige', 'text-warmBrown');
+            });
+            event.target.closest('.gift-amt-btn').classList.remove('border-beige', 'text-warmBrown');
+            event.target.closest('.gift-amt-btn').classList.add('border-gold', 'bg-softCream', 'text-espresso', 'shadow-sm');
+            document.getElementById('preview-card-amount').innerText = `₹${amt}`;
+        }
+
+        function setCustomGiftAmount(val) {
+            const amt = parseInt(val, 10);
+            document.querySelectorAll('.gift-amt-btn').forEach(b => {
+                b.classList.remove('border-gold', 'bg-softCream', 'text-espresso');
+                b.classList.add('border-beige', 'text-warmBrown');
+            });
+            if (!isNaN(amt) && amt >= 100) {
+                giftAmount = amt;
+                document.getElementById('preview-card-amount').innerText = `₹${amt}`;
+            }
+        }
+
+        function updateGiftPreview() {
+            const name = document.getElementById('gift-recipient').value;
+            document.getElementById('preview-card-recipient').innerText = name ? `To: ${name}` : 'To: Friend';
+        }
+
+        function handleGiftCardSubmit(e) {
+            e.preventDefault();
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const generatedCardNumber = `TBC-${randomNum}`;
+            const generatedPin = Math.floor(100 + Math.random() * 900).toString();
+
+            issuedGiftCards[generatedCardNumber] = { balance: giftAmount, pin: generatedPin };
+
+            showToast("Gift Card Issued!", `Card No: ${generatedCardNumber} | PIN: ${generatedPin} (Balance: ₹${giftAmount})`);
+            
+            document.getElementById('check-card-number').value = generatedCardNumber;
+            document.getElementById('check-card-pin').value = generatedPin;
+
+            e.target.reset();
+            document.getElementById('preview-card-recipient').innerText = 'To: Friend';
+        }
+
+        function handleBalanceCheck(e) {
+            e.preventDefault();
+            const cardNum = document.getElementById('check-card-number').value.trim();
+            const pin = document.getElementById('check-card-pin').value.trim();
+
+            if (issuedGiftCards[cardNum] && issuedGiftCards[cardNum].pin === pin) {
+                const bal = issuedGiftCards[cardNum].balance;
+                showToast("Balance Retrieved", `Card ${cardNum} has an active balance of ₹${bal}.`);
+            } else {
+                showToast("Invalid Credentials", "Card number or PIN not found in system.");
+            }
+        }
+
+        let feedbackRating = 0;
+
+        function switchReviewsTab(tabName) {
+            document.querySelectorAll('.reviews-subcontent').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.reviews-sub-btn').forEach(b => {
+                b.classList.remove('bg-roast', 'text-gold', 'shadow-sm');
+                b.classList.add('text-warmBrown');
+            });
+            document.getElementById(`reviews-content-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`reviews-tab-${tabName}`);
+            activeBtn.classList.remove('text-warmBrown');
+            activeBtn.classList.add('bg-roast', 'text-gold', 'shadow-sm');
+        }
+
+        function setFeedbackRating(value) {
+            feedbackRating = value;
+            document.querySelectorAll('.feedback-star').forEach(star => {
+                const starValue = parseInt(star.dataset.value, 10);
+                if (starValue <= value) {
+                    star.classList.remove('text-beige');
+                    star.classList.add('text-gold');
+                } else {
+                    star.classList.remove('text-gold');
+                    star.classList.add('text-beige');
+                }
+            });
+            const labels = ['Tap a star to rate', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent!'];
+            document.getElementById('feedback-rating-label').innerText = labels[value] || 'Tap a star to rate';
+        }
+
+        function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            if (feedbackRating === 0) {
+                showToast("Add a Rating", "Please select a star rating before submitting.");
+                return;
+            }
+
+            const name = document.getElementById('feedback-name').value;
+            const text = document.getElementById('feedback-text').value;
+
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<i class="fa-solid fa-star ${i <= feedbackRating ? 'text-gold' : 'text-beige'} text-xs"></i>`;
+            }
+
+            const reviewsGrid = document.getElementById('guest-reviews-grid');
+            const newCard = document.createElement('div');
+            newCard.className = 'bg-white p-6 rounded-2xl shadow-sm luxury-card border border-beige/30 animate-fadeInUp';
+            newCard.innerHTML = `
+                <div class="flex items-center gap-1 mb-2">${starsHtml}</div>
+                <p class="text-espresso/90 text-sm italic leading-relaxed">"${text}"</p>
+                <p class="mt-4 font-bold text-espresso text-sm">— ${name}</p>
+            `;
+            reviewsGrid.prepend(newCard);
+
+            showToast("Feedback Received!", `Thanks for your ${feedbackRating}-star review. It's now live!`);
+            e.target.reset();
+            setFeedbackRating(0);
+            switchReviewsTab('reviews');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast("Reservation Request Sent!", "The Bidholi Corner team will contact you shortly.");
+            e.target.reset();
+        }
+
+        function openAuthModal(mode) {
+            currentAuthMode = mode;
+            const modal = document.getElementById('auth-modal');
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const btn = document.getElementById('auth-submit-btn');
+            const usernameField = document.getElementById('auth-username-field');
+            const confirmField = document.getElementById('auth-confirm-password-field');
+            const emailLabel = document.getElementById('auth-email-label');
+
+            if (mode === 'signup') {
+                title.innerText = 'Join TBC Rewards';
+                subtitle.innerText = 'Create your account to start earning stars and rewards.';
+                btn.innerText = 'Sign Up';
+                usernameField.classList.remove('hidden');
+                confirmField.classList.remove('hidden');
+                document.getElementById('auth-input-username').setAttribute('required', 'true');
+                document.getElementById('auth-input-confirm').setAttribute('required', 'true');
+                emailLabel.innerText = 'Email Address';
+                document.getElementById('auth-input-name').placeholder = 'aarav@outlook.com or aarav@gmail.com';
+                document.getElementById('auth-input-name').type = 'email';
+                document.getElementById('auth-input-name').pattern = '[a-z0-9._%+-]+@(gmail\\.com|outlook\\.com|hotmail\\.com|live\\.com|[a-z0-9.-]+\\.[a-z]{2,})$';
+            } else {
+                title.innerText = 'Sign In to TBC';
+                subtitle.innerText = 'Access your stars, rewards, and saved orders.';
+                btn.innerText = 'Sign In';
+                usernameField.classList.add('hidden');
+                confirmField.classList.add('hidden');
+                document.getElementById('auth-input-username').removeAttribute('required');
+                document.getElementById('auth-input-confirm').removeAttribute('required');
+                emailLabel.innerText = 'Your Name / Email';
+                document.getElementById('auth-input-name').placeholder = 'aarav@outlook.com or aarav@gmail.com';
+                document.getElementById('auth-input-name').type = 'email';
+                document.getElementById('auth-input-name').pattern = '[a-z0-9._%+-]+@(gmail\\.com|outlook\\.com|hotmail\\.com|live\\.com|[a-z0-9.-]+\\.[a-z]{2,})$';
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            if (currentAuthMode === 'signup') {
+                const pass = document.getElementById('auth-input-password').value;
+                const confirm = document.getElementById('auth-input-confirm').value;
+                if (pass !== confirm) {
+                    showToast("Password Mismatch", "Passwords do not match. Please try again.");
+                    return;
+                }
+                const usernameVal = document.getElementById('auth-input-username').value.trim();
+                loggedInUserName = usernameVal || 'Member';
+            } else {
+                const inputNameVal = document.getElementById('auth-input-name').value.trim();
+                loggedInUserName = inputNameVal ? inputNameVal.split('@')[0] : 'Member';
+            }
+            isUserSignedIn = true;
+
+            updateAuthUIState();
+            closeAuthModal();
+            showToast("Welcome!", `Successfully ${currentAuthMode === 'signup' ? 'signed up' : 'signed in'} as ${loggedInUserName}.`);
+            e.target.reset();
+        }
+
+        function handleSignOut() {
+            isUserSignedIn = false;
+            updateAuthUIState();
+            showToast("Signed Out", "You have been successfully signed out.");
+        }
+
+        function updateAuthUIState() {
+            const desktopContainer = document.getElementById('auth-actions-container');
+            const profileBadge = document.getElementById('user-profile-badge');
+            const profileName = document.getElementById('user-profile-name');
+
+            const mobileContainer = document.getElementById('mobile-auth-container');
+            const mobileBadge = document.getElementById('mobile-user-badge');
+            const mobileName = document.getElementById('mobile-user-name');
+
+            if (isUserSignedIn) {
+                desktopContainer.classList.add('hidden');
+                desktopContainer.classList.remove('flex');
+                
+                profileBadge.classList.remove('hidden');
+                profileBadge.classList.add('flex');
+                profileName.innerText = loggedInUserName;
+
+                mobileContainer.classList.add('hidden');
+                mobileBadge.classList.remove('hidden');
+                mobileName.innerText = `Hi, ${loggedInUserName}`;
+            } else {
+                desktopContainer.classList.remove('hidden');
+                desktopContainer.classList.add('flex');
+
+                profileBadge.classList.remove('flex');
+                profileBadge.classList.add('hidden');
+
+                mobileContainer.classList.remove('hidden');
+                mobileBadge.classList.add('hidden');
+            }
+        }
+
+        function openStoreLocator() {
+            document.getElementById('store-locator-modal').classList.remove('hidden');
+        }
+
+        function closeStoreLocator() {
+            document.getElementById('store-locator-modal').classList.add('hidden');
+        }
+
+        function showToast(title, message) {
+            const toast = document.getElementById('toast-modal');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3500);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function initScrollObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        }
+
+        window.onload = function () {
+            renderHomeFeatured();
+            renderMenuGrid();
+            renderShopGrid('beans');
+            initScrollObserver();
+            filterShopCategory('beans');
+        }
+    </script>
+</body>
+
+</html>

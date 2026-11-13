@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | The Bidholi Corner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { espresso: '#2A1A10', roast: '#4E3220', rust: '#B4602A', beige: '#D7CCC8', cream: '#FBF6EC', softCream: '#F1E4CC', gold: '#CE9E5E' }, fontFamily: { serif: ['Fraunces', 'serif'], sans: ['Plus Jakarta Sans', 'sans-serif'] } } } }
+    </script>
+</head>
+<body class="bg-cream text-espresso font-sans antialiased pt-20">
+
+    <!-- NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-espresso/90 backdrop-blur-md border-b border-gold/20">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-20">
+            <a href="index.html" class="flex items-center gap-3">
+                <i class="fa-solid fa-mug-hot text-rust text-xl"></i>
+                <span class="font-serif text-2xl font-bold text-cream">The Bidholi Corner</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-cream hover:text-gold text-sm font-medium transition-colors">Home</a>
+                <a href="about.html" class="text-gold text-sm font-medium">About Us</a>
+                <a href="menu.html" class="text-cream hover:text-gold text-sm font-medium transition-colors">Menu</a>
+                <a href="contact.html" class="text-cream hover:text-gold text-sm font-medium transition-colors">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section class="py-20 bg-cream min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <span class="text-rust font-serif italic text-lg">About Us</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold text-espresso mt-2 mb-6">A Fusion of Taste & Comfort</h2>
+            <p class="text-roast/80 text-lg leading-relaxed mb-10 max-w-3xl mx-auto">
+                Nestled in the scenic surroundings near Bidholi, The Bidholi Corner is the kind of place you come to for one coffee and stay for three hours. 
+            </p>
+            
+            <div class="mt-8 bg-softCream border-l-4 border-rust p-5 rounded-r-xl shadow-sm max-w-2xl mx-auto text-left">
+                <h4 class="font-bold text-rust text-sm uppercase tracking-wider mb-1">A Code Minds Project</h4>
+                <p class="text-sm text-roast/80">This website was designed and built by <strong>Code Minds</strong> as a college project.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-espresso text-cream pt-12 pb-8 border-t border-gold/20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>© 2026 The Bidholi Corner. A Code Minds Project.</p>
+        </div>
+    </footer>
+</body>
+</html>
